@@ -1,0 +1,20 @@
+services:
+  neo4j:
+    image: neo4j:5.25.1-community-bullseye
+    restart: unless-stopped
+    ports:
+      - "7473:7473"
+      - "7474:7474"
+      - "7687:7687"
+    env_file:
+      - stack.env
+    volumes:
+        - /home/tony/neo4j/backups:/var/lib/neo4j/backups            # Backup directory
+        - /home/tony/neo4j/certificates:/var/lib/neo4j/certificates  # SSL certificates for encryption
+      # - /home/tony/neo4j/conf:/var/lib/neo4j/conf                  # Configuration files
+        - /home/tony/neo4j/data:/var/lib/neo4j/data                  # Data store for Neo4j
+        - /home/tony/neo4j/import:/var/lib/neo4j/import              # Importable files for neo4j-admin
+        - /home/tony/neo4j/licenses:/var/lib/neo4j/licenses          # License folder for Neo4j/plugins
+        - /home/tony/neo4j/logs:/var/lib/neo4j/logs                  # Output directory for logs
+        - /home/tony/neo4j/metrics:/var/lib/neo4j/metrics            # Metrics output (if applicable)
+        - /home/tony/neo4j/plugins:/var/lib/neo4j/plugins            # Plugins installation
